@@ -1,7 +1,7 @@
 import speech_recognition
 # TODO: make daddy download SPEECH RECOGNITION!!! SO WE CAN YELL AT OUR COMPUTERS!!!! YAY!!!!
 
-voice = speech_recognition.Recognizer()
+recognizer = speech_recognition.Recognizer()
 with speech_recognition.Microphone() as source:
     print("Say something or else you shall feel the fate as dead Einstein!(Who got his brain took out for study!)")
     audio = recognizer.listen(source)
@@ -11,6 +11,8 @@ with speech_recognition.Microphone() as source:
 
 
 words = recognizer.recognize_google(audio)
+
+print(f"you said: {words}")
 
 if "Hello." in words:
     print("Hello, I hope your doing okay since we are in quarantine, and even as a robot, I'm going insane!")
