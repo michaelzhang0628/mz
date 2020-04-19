@@ -1,4 +1,5 @@
 import speech_recognition
+import sys
 # TODO: make daddy download SPEECH RECOGNITION!!! SO WE CAN YELL AT OUR COMPUTERS!!!! YAY!!!!
 
 recognizer = speech_recognition.Recognizer()
@@ -9,8 +10,10 @@ with speech_recognition.Microphone() as source:
 # print("Google Speech Recognition thinks you said:")
 # print(recognizer.recognize_google(audio))
 
-
-words = recognizer.recognize_google(audio)
+try:
+    words = recognizer.recognize_google(audio)
+except speech_recognition.UnknownValueError:
+    sys.exit("You said something that can NOT be recognized!")
 
 print(f"you said: {words}")
 
