@@ -1,6 +1,6 @@
 from tkinter import Tk, Label, Button
 
-class MyFirstGUI: FUCK YOUR FUCKING ASSHOLE KEKE AND DADDY. FUCK YOU, FUCK YOU. SHIT MY CRAP.
+class MyFirstGUI:
     def __init__(self, master):
         self.master = master
         master.title("A simple GUI")
