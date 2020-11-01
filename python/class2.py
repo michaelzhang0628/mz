@@ -17,13 +17,3 @@ for x in range(5, 0, -1):
     for y in range(x):
         print(x, end = ' ')
     print()
-
-for x in range(10, 1, -2):
-    for y in range(6 - x//2):
-        print(10 - y * 2, end=" ")
-    print()
-
-for x in range(5):
-    for y in range(x+1):
-        print(10 - y * 2, end=" ")
-    print()

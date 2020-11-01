@@ -1,30 +1,29 @@
-numbers = [30, -17, 22, 81, 12, -36, 1]
-print(f"{numbers} is a list")
-count = len(numbers)
-print(f"This list has {count} numbers")
+def mz_count(list):
+    count = 0
+    for item in list:
+        count = count + 1
+    return count
 
-# average
-sum = 0
-for item in numbers:
-    sum = sum + item
-print(f"The total is {sum}")
-average = sum / count
-print(f"The average is {average}")
+def mz_average(list):
+    sum = 0
+    for item in list:
+        sum = sum + item
+    average = sum / mz_count(list)
+    return average
 
-# min, find the smallest
-min = 0
-for currentNumber in numbers:
-    if currentNumber < min:
-        min = currentNumber
-print(f"The smallest number is {min}.")
+def mz_min(list):
+    min = 0
+    for number in list:
+        if number < min:
+            min = number
+    return min
 
-# max, find the biggest number
-max = 0
-for currentNumber in numbers:
-    if currentNumber > max:
-        max = currentNumber
-print(f"The biggest number is {max}.")
-
+def mz_max(list):
+    max = 0
+    for number in list:
+        if number > max:
+            max = number
+    return max
 
 # standard deviation
 # 1. get average
@@ -32,3 +31,20 @@ print(f"The biggest number is {max}.")
 # 3. average the diff squared
 # 4. square root
 
+numbers = [5,4,3,2,1,0]
+
+# count
+print(f"The count is {mz_count(numbers)}")
+print(f"The count is {mz_count([2, 4, -1, 0.5])}")
+
+# average
+print(f"The average is {mz_average(numbers)}")
+print(f"The average is {mz_average([2, 4, -1, 0.5])}")
+
+# min, find the smallest
+print(f"The smallest number is {mz_min(numbers)}")
+print(f"The smallest number is {mz_min([2, 4, -1, 0.5])}")
+
+# max, find the biggest number
+print(f"The biggest number is {mz_max(numbers)}")
+print(f"The biggest number is {mz_max([2, 4, -1, 0.5])}")
