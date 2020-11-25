@@ -6,7 +6,7 @@ while True:
     elif "How are you?" in words:
         print("I am amazing, even during this tragic event, coronavirus. Duhn, duhn, DUHNNNNNNNN!!!!!")
     elif "Goodbye" in words:
-        print("Goodbye to you too chap! Our conversation was very lovely, so see you later, alligator! Adios!")
+        print("Goodbye to you too, chap! Our conversation was very lovely, so see you later, alligator! Adios!")
         break
     else:
         print("Bruh, what the heck are you doing? Are you dumb? Try again.")
