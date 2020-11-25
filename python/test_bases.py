@@ -32,3 +32,24 @@ class Test(TestCase):
         self.assertEqual("2e", decimal_hexdecimal(46))
         self.assertEqual("f2e", decimal_hexdecimal(3886))
 
+    def test_binary_decimal(self):
+        self.assertEqual(0, binary_decimal("0"))
+        self.assertEqual(1, binary_decimal("1"))
+        self.assertEqual(2, binary_decimal("10"))
+        self.assertEqual(3, binary_decimal("11"))
+        self.assertEqual(15, binary_decimal("1111"))
+        self.assertEqual(256, binary_decimal("100000000"))
+
+    def test_decimal_binary(self):
+        self.assertEqual("0", decimal_binay(0))
+        self.assertEqual("1", decimal_binay(1))
+        self.assertEqual("1010", decimal_binay(10))
+        self.assertEqual("11", decimal_binay(3))
+        self.assertEqual("1111", decimal_binay(15))
+        self.assertEqual("100000000", decimal_binay(256))
+
+    def test_hex_decimal(self):
+        self.assertEqual(51, base_any_decimal(6, "123"))
+
+    def test_decimal_hex(self):
+        self.assertEqual("1555", decimal_base_any(6, 431))
