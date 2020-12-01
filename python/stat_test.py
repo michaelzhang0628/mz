@@ -24,7 +24,8 @@ class Test(TestCase):
         self.assertEqual(8, mz_max([-3, 2, 4, 1, 8]))
 
     def test_mz_standard_deviation(self):
-        self.assertAlmostEqual(1.65, mz_standard_deviation([3, 2, 6, 1, 2]), places=2)
+        self.assertAlmostEqual(1.41, mz_standard_deviation([3, 5, 6, 4, 7]), places=2)
+        self.assertAlmostEqual(1.72, mz_standard_deviation([3, 2, 6, 1, 2]), places=2)
 
     def test_mz_sort(self):
         self.assertEqual([1, 2, 2, 3, 6], mz_sort([3, 2, 6, 1, 2]))
