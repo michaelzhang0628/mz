@@ -1,4 +1,4 @@
-def octal_decimal(o_number):
+'''def octal_decimal(o_number):
     count = 0
     d_number = 0
     for character in o_number:
@@ -58,4 +58,12 @@ def decimal_hexdecimal(d_number):
     while d_number >= 16:
         h_number = convert_number_to_hexdecimal(d_number % 16) + h_number
         d_number = d_number // 16
-    return convert_number_to_hexdecimal(d_number) + h_number
+    return convert_number_to_hexdecimal(d_number) + h_number'''
+
+'''def mz_standard_deviation(list):
+    a = mz_average(list)
+    s = 0
+    for number in list:
+         s += ((number - a) ** 2)
+    a_2 = (s/mz_count(list))
+    return sqrt(a_2)'''

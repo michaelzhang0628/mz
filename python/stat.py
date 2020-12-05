@@ -1,19 +1,16 @@
 from math import sqrt
 
-
 def mz_count(list):
     number = 0
     for item in list:
         number += 1
     return number
 
-
 def mz_average(list):
     sum = 0
     for item in list:
         sum += item
     return (sum / mz_count(list))
-
 
 def mz_min(list):
     min = list[0]
@@ -22,7 +19,6 @@ def mz_min(list):
             min = item
     return min
 
-
 def mz_max(list):
     max = list[0]
     for item in list:
@@ -30,34 +26,31 @@ def mz_max(list):
             max = item
     return max
 
-
-"""
- Step 1: Find the mean.
-    Step 2: For each data point, find the square of its distance to the mean.
-    Step 3: Sum the values from Step 2.
-    Step 4: Divide by the number of data points.
-    Step 5: Take the square root.
-"""
-
-
 def mz_standard_deviation(list):
     a = mz_average(list)
     s = 0
     for number in list:
-        sq = (number - a) ** 2
-        s += sq
-    a_2 = s/mz_count(list)
-    sq_2 = sqrt(a_2)
-    return sq_2
+         s += ((number - a) ** 2)
+    a_2 = (s/mz_count(list))
+    return sqrt(a_2)
 
-
-def mz_sort(list):
-    return list
-
+def mz_sort(unsorted):
+    sorted = []
+    while mz_count(unsorted) != 0:
+        min = mz_min(unsorted)
+        sorted.append(min)
+        unsorted.remove(min)
+    return sorted
 
 def mz_median(list):
-    return 0
-
+    sorted = mz_sort(list)
+    if mz_count(sorted)%2 == 0:
+        index = mz_count(sorted) // 2
+        answer = (sorted[index - 1] + sorted[index]) / 2
+    if mz_count(sorted)%2 == 1:
+        index = mz_count(sorted) // 2
+        answer = sorted[index]
+    return answer
 
 def mz_mode(list):
     return 0

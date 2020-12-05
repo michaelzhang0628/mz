@@ -29,6 +29,7 @@ class Test(TestCase):
 
     def test_mz_sort(self):
         self.assertEqual([1, 2, 2, 3, 6], mz_sort([3, 2, 6, 1, 2]))
+        self.assertEqual([-3, -2, 1/3, 6, 20.5], mz_sort([-3, 20.5, 6, 1/3, -2]))
 
     def test_mz_median(self):
         self.assertEqual(2, mz_median([3, 2, 6, 1, 2]))
