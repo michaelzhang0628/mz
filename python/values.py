@@ -67,3 +67,59 @@ def decimal_hexdecimal(d_number):
          s += ((number - a) ** 2)
     a_2 = (s/mz_count(list))
     return sqrt(a_2)'''
+
+'''def printBoard(board):
+    print(board[7] + '|' + board[8] + '|' + board[9])
+    print('-+-+-')
+    print(board[4] + '|' + board[5] + '|' + board[6])
+    print('-+-+-')
+    print(board[1] + '|' + board[2] + '|' + board[3])
+
+def gameInput(board):
+    while True:
+        number = int(input("Please enter a number that's posotive and <= 9\n"))
+        if number<1 or number>9:
+            print(f"Please enter a number that's positive and <= 9 besides {number}")
+            continue
+        if board[number] != " ":
+            print(f"The spot is taken.  Please enter a number that is not {number}")
+            continue
+        return number
+
+testBoard = list('#         $$$$')
+printBoard(testBoard)
+while True:
+    move = gameInput(testBoard)
+    testBoard[move] = "O"
+    printBoard(testBoard)'''
+
+'''import random
+
+while True:
+    yourRPS = input("Type in Rock, Paper, or Scissors.\n")
+    myRPS = random.choice(["Rock", "Paper", "Scissors"])
+    print(f"I got {myRPS}")
+    if "Rock" == yourRPS:
+        if "Rock" == myRPS:
+            print("Tie.")
+        elif "Paper" == myRPS:
+            print("You lose!")
+        elif "Scissors" == myRPS:
+            print("You win!")
+    elif "Paper" == yourRPS:
+        if "Rock" == myRPS:
+            print("You win!")
+        elif "Paper" == myRPS:
+            print("Tie.")
+        elif "Scissors" == myRPS:
+            print("You lose!")
+    elif "Scissors" == yourRPS:
+        if "Rock" == myRPS:
+            print("You lose!")
+        elif "Paper" == myRPS:
+            print("You win!")
+        elif "Scissors" == myRPS:
+            print("Tie.")
+    else:
+        print("Bruh, what the heck are you doing? Are you dumb? Try again.")'''
+

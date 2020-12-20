@@ -44,12 +44,12 @@ def mz_sort(unsorted):
 
 def mz_median(list):
     sorted = mz_sort(list)
-    if mz_count(sorted)%2 == 0:
-        index = mz_count(sorted) // 2
-        answer = (sorted[index - 1] + sorted[index]) / 2
+    if mz_count(sorted) % 2 == 0:
+        value = mz_count(sorted) // 2
+        answer = (sorted[value - 1] + sorted[value]) / 2
     if mz_count(sorted)%2 == 1:
-        index = mz_count(sorted) // 2
-        answer = sorted[index]
+        value = mz_count(sorted) // 2
+        answer = sorted[value]
     return answer
 
 def mz_mode(list):

@@ -1,4 +1,3 @@
-# ask user to type in r(ock), p(aper), s(cissors), and the computer will generate a random r/p/s.  See who wins.
 import random
 
 while True:
