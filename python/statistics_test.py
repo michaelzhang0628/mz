@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from python.stat import *
+from python.statistics import *
 
 
 class Test(TestCase):
