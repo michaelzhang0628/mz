@@ -3,6 +3,7 @@ from pygame.locals import *
 from urllib.request import urlopen
 
 pygame.init()
+pygame.font.init()
 FPS = 15
 fpsClock = pygame.time.Clock()
 
@@ -12,8 +13,8 @@ fpsClock = pygame.time.Clock()
 # ***************************************
 
 # Function to draw characters
-# Width: 60,  Height: 80
-# Left offset -15   Top offset -20
+# Width: 30,  Height: 45
+# Left offset 0   Top offset -5
 def drawCharacter(screen, x, y):
     pygame.draw.rect(screen, BLACK, (x, y, 30, 40))
     pygame.draw.polygon(screen, BLACK, [(x, y + 15), (x - 15, y + 23), (x - 10, y + 30), (x, y + 25)])
@@ -30,19 +31,22 @@ def drawCharacter(screen, x, y):
 
 
 def drawUser(screen, x, y):
-    if shieldOn:
+    if shieldOn == True:
         pygame.draw.circle(screen, BLUE, (x + 10, y + 20), 70)
         pygame.draw.circle(screen, BLUE2, (x + 10, y + 20), 60)
     pygame.draw.rect(screen, YELLOW, (x, y, 20, 40))
+    pygame.draw.rect(screen, BLACK, (x, y, 20, 40), 1)
     pygame.draw.polygon(screen, YELLOW2, [(x, y), (x - 30, y - 20), (x - 40, y - 20), (x - 70, y + 40), (x, y + 15)])
-    pygame.draw.polygon(screen, YELLOW2,
-                        [(x + 20, y), (x + 50, y - 20), (x + 60, y - 20), (x + 90, y + 40), (x + 20, y + 15)])
+    pygame.draw.polygon(screen, YELLOW2,[(x + 20, y), (x + 50, y - 20), (x + 60, y - 20), (x + 90, y + 40), (x + 20, y + 15)])
     pygame.draw.polygon(screen, GREY, [(x, y - 15), (x, y), (x + 20, y), (x + 20, y - 15), (x + 10, y - 25)])
     pygame.draw.polygon(screen, BROWN, [(x, y), (x - 25, y + 20), (x - 20, y + 28), (x, y + 15)])
     pygame.draw.polygon(screen, BROWN, [(x + 20, y), (x + 45, y + 20), (x + 40, y + 28), (x + 20, y + 15)])
     pygame.draw.rect(screen, WHITE, (x, y + 40, 8, 25))
     pygame.draw.rect(screen, WHITE, (x + 12, y + 40, 8, 25))
-    pygame.draw.rect(screen, BLUE, (x + 3, y - 15, 14, 7))
+    pygame.draw.rect(screen, BLACK, (x, y + 40, 8, 25), 1)
+    pygame.draw.rect(screen, BLACK, (x + 12, y + 40, 8, 25), 1)
+    pygame.draw.rect(screen, PURPLE, (x + 3, y - 15, 14, 7))
+    pygame.draw.rect(screen, BLACK, (x + 3, y - 15, 14, 7), 1)
     if x - 30 >= 0:
         pygame.draw.circle(screen, PURPLE, (x - 30, y + 5), 10)
     pygame.draw.circle(screen, PURPLE, (x + 50, y + 5), 10)
@@ -105,17 +109,22 @@ laserBolts = []
 # Loop to create 4 laser bolts
 for i in range(maxShots):
     # Add a laser bolt to the list of Rect objects.
-    laserBolts.append(pygame.Rect(-20, -10, 10, 20))
+    laserBolts.append(pygame.Rect(-30, -20, 10, 20))
     # The lasers will be 10 pixels wide and 20 pixels tall. The location is just off the screen. We just need them to
     # exist.
 
-# Sheild Variable
+# Shield Variable
 shieldOn = False
 shieldTimer = 45
 
 # Variable for User
 UserX = 0
 UserY = 50
+
+# Variable for core
+score = 0
+totalNumOfShots = 0
+scoreFont = pygame.font.Font(pygame.font.get_default_font(), 17)
 
 # Main Game Loop
 while True:
@@ -127,6 +136,7 @@ while True:
             sys.exit()
         elif event.type == MOUSEBUTTONDOWN:
             if event.button == 1:
+                totalNumOfShots += 1
                 if laserBolts[numShots].bottom > 480:
                     # Add 6 to center the laser with the player.
                     laserBolts[numShots].x = UserX + 6
@@ -148,11 +158,13 @@ while True:
             # Check if character should be alive
             for j in range(maxShots):
                 # Colliderect takes a rect that is based on characterXCoords[i] and characterYCoords[i]
-                characterRect = Rect(characterXCoords[i] - 15, characterYCoords[i] - 20, 60, 80)
+                characterRect = Rect(characterXCoords[i], characterYCoords[i] - 5, 30, 45)
                 if laserBolts[j].colliderect(characterRect) and characterAlive[i]:
+                    score += 5
                     characterAlive[i] = False
                     # Once character is killed by a shot, move the shot outside the surface
-                    laserBolts[j].move_ip(0, DISPLAYSURF.get_height())
+                    laserBolts[j].x = -20
+                    laserBolts[j].y = -30
 
             # Draw character
             drawCharacter(DISPLAYSURF, characterXCoords[i], characterYCoords[i])
@@ -177,7 +189,7 @@ while True:
     drawUser(DISPLAYSURF, UserX, UserY)
 
     # To turn shield off and reset
-    if shieldOn:
+    if shieldOn == True:
         shieldTimer = shieldTimer - 1
         if shieldTimer <= 0:
             shieldOn = False
@@ -189,6 +201,13 @@ while True:
         laserBolts[i].move_ip(0, 10)
         # Draw a rectangle with the current laser bolt
         pygame.draw.rect(DISPLAYSURF, PURPLE, laserBolts[i])
+
+    # Draw text
+    textSurface = scoreFont.render(("Score: " + str(score) + "  Shots Fired: " + str(totalNumOfShots)), True, BLACK, WHITE)
+    textRect = textSurface.get_rect()
+    textRect.left = 10
+    textRect.bottom = DISPLAYSURF.get_height() - 10
+    DISPLAYSURF.blit(textSurface, textRect)
 
     # Update the graphics
     pygame.display.update()
