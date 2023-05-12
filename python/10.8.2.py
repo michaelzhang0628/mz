@@ -128,8 +128,8 @@ while True:
         elif event.type == MOUSEBUTTONDOWN:
             if event.button == 1:
                 if laserBolts[numShots].bottom > 480:
-                    # Add 10 to center the laser with the player.
-                    laserBolts[numShots].x = UserX + 7
+                    # Add 6 to center the laser with the player.
+                    laserBolts[numShots].x = UserX + 6
                     laserBolts[numShots].y = UserY
                     numShots += 1
                     if numShots >= maxShots:
@@ -143,14 +143,15 @@ while True:
 
     # Draws enemy characters
     for i in range(numCharacter):
-        # Draw the character
+        # Draw the character if alive
         if characterAlive[i]:
             # Check if character should be alive
             for j in range(maxShots):
-                # colliderect takes a rect, which we don't have, need to calculate based on characterXCoords[i] and characterYCoords[i]
+                # Colliderect takes a rect that is based on characterXCoords[i] and characterYCoords[i]
                 characterRect = Rect(characterXCoords[i] - 15, characterYCoords[i] - 20, 60, 80)
                 if laserBolts[j].colliderect(characterRect) and characterAlive[i]:
                     characterAlive[i] = False
+            # Draw character
             drawCharacter(DISPLAYSURF, characterXCoords[i], characterYCoords[i])
 
         # Update character x coordinates
