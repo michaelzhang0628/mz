@@ -161,6 +161,10 @@ while True:
                     enemyAlive = []
                     enemyKilled = 0
                     gameState = PLAY
+                    UserLives = 3
+                    blast = []
+                    for i in range(numEnemy):
+                        blast.append(pygame.Rect(-60, -20, 20, 40))
                     for i in range(numEnemy):
                         enemyXCoords.append(startingXCoord + (i * 80))
                         moveXAmnts.append(random.randint(2, 10))
@@ -206,6 +210,8 @@ while True:
         UserRect = drawUser(DISPLAYSURF, UserX, UserY)
 
         if enemyKilled == numEnemy:
+            gameState = GAMEOVER
+        if UserLives == 0:
             gameState = GAMEOVER
         for i in range(numEnemy):
             # Draw the Enemy if alive
