@@ -75,12 +75,12 @@ playerImgx = 0
 playerImgy = 0
 
 # Set up the window (surface)
-DISPLAYSURF = pygame.display.set_mode((480, 360))
+DISPLAYSURF = pygame.display.set_mode((500, 400))
 image_url = "https://codehs.com/uploads/bea96ab515b168282eb7ba2911ff230e"
 image_str = urlopen(image_url).read()
 image_file = io.BytesIO(image_str)
 playerImg = pygame.image.load(image_file)
-playerImg = pygame.transform.scale(playerImg, (480, 360))
+playerImg = pygame.transform.scale(playerImg, (DISPLAYSURF.get_width(), DISPLAYSURF.get_height()))
 
 # Character coordinates
 characterXCoords = []
@@ -125,6 +125,11 @@ UserY = 50
 score = 0
 totalNumOfShots = 0
 scoreFont = pygame.font.Font(pygame.font.get_default_font(), 17)
+
+BEGIN = 0
+PLAY = 1
+GAMEOVER = 2
+gameState = 0
 
 # Main Game Loop
 while True:
