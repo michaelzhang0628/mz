@@ -51,9 +51,7 @@ def drawUser(screen, x, y):
     if x - 30 >= 0:
         pygame.draw.circle(screen, PURPLE, (x - 30, y + 5), 10)
     pygame.draw.circle(screen, PURPLE, (x + 50, y + 5), 10)
-    return pygame.Rect(x, y, 160, 65)
-
-
+    return pygame.Rect(x, y - 25, 20, 100)
 
 # ***************************************
 # *             MAIN PROGRAM            *
@@ -94,7 +92,7 @@ moveYAmnts = []
 jumpCeiling = []
 startingXCoord = 20
 startingYCoord = playerImg.get_height() - 100
-numEnemy = 4
+numEnemy = 6
 enemyAlive = []
 enemyKilled = 0
 for i in range(numEnemy):
@@ -145,6 +143,10 @@ gameState = BEGIN
 UserRect = drawUser(DISPLAYSURF, UserX, UserY)
 UserLives = 3
 
+explosionCenterX = -100
+explosionCenterY = -100
+explosionTime = FPS
+
 # Main Game Loop
 while True:
 
@@ -163,6 +165,7 @@ while True:
                     gameState = PLAY
                     UserLives = 3
                     blast = []
+                    explosionTime = FPS
                     for i in range(numEnemy):
                         blast.append(pygame.Rect(-60, -20, 20, 40))
                     for i in range(numEnemy):
@@ -205,9 +208,9 @@ while True:
         # Don't want to update User y-coordinate
         UserX = pos[0]
 
-        # Draw User
-        drawUser(DISPLAYSURF, UserX, UserY)
-        UserRect = drawUser(DISPLAYSURF, UserX, UserY)
+        # Draw User only when it is not exploded
+        if explosionCenterX < 0 or explosionCenterY < 0:
+            UserRect = drawUser(DISPLAYSURF, UserX, UserY)
 
         if enemyKilled == numEnemy:
             gameState = GAMEOVER
@@ -219,8 +222,8 @@ while True:
                 # Check if Enemy should be alive
                 for j in range(maxShots):
                     # Colliderect takes a rect that is based on enemyXCoords[i] and enemyYCoords[i]
-                    characterRect = Rect(enemyXCoords[i], enemyYCoords[i] - 5, 30, 45)
-                    if laserBolts[j].colliderect(characterRect) and enemyAlive[i]:
+                    enemyRect = Rect(enemyXCoords[i], enemyYCoords[i] - 5, 30, 45)
+                    if laserBolts[j].colliderect(enemyRect) and enemyAlive[i]:
                         score += 5
                         enemyAlive[i] = False
                         enemyKilled += 1
@@ -260,15 +263,27 @@ while True:
         # Update and draw blast
         for i in range(numEnemy):
             if blast[i].colliderect(UserRect):
-                UserLives -= 1
-                pygame.draw.circle(DISPLAYSURF, ORANGE, (UserX, UserY), 50)
-                pygame.draw.circle(DISPLAYSURF, RED, (UserX, UserY), 25)
+                if shieldOn == False:
+                    UserLives -= 1
+                    # Drawing explosion
+                    explosionCenterX = UserX + 10
+                    explosionCenterY = UserY + 20
+                    explosionTime = FPS
                 blast[i].x = -100
                 blast[i].y = -100
             # Move the current laser 10 pixels down
             blast[i].move_ip(0, random.randint(-5, -1))
             # Draw a rectangle with the current laser bolt
             pygame.draw.rect(DISPLAYSURF, RED, blast[i])
+
+        # Drawing explosion
+        if explosionTime > 0:
+            explosionTime -= 1
+        else:
+            explosionCenterX = -100
+            explosionCenterY = -100
+        pygame.draw.circle(DISPLAYSURF, ORANGE, (explosionCenterX, explosionCenterY), 75)
+        pygame.draw.circle(DISPLAYSURF, RED, (explosionCenterX, explosionCenterY), 50)
 
         # Draw text
         textSurface = scoreFont.render(("Score: " + str(score) + "  Shots Fired: " + str(totalNumOfShots)), True, BLACK, WHITE)
