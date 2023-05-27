@@ -194,11 +194,11 @@ while True:
     DISPLAYSURF.blit(playerImg, (playerImgx, playerImgy))
 
     if gameState == BEGIN:
-        textSurface = beginFont.render(("Click to begin"), True, BLACK, WHITE)
-        textRect = textSurface.get_rect()
-        textRect.left = 150
-        textRect.bottom = DISPLAYSURF.get_height() - 200
-        DISPLAYSURF.blit(textSurface, textRect)
+        scoreboardSurface = beginFont.render(("Click to begin"), True, BLACK, WHITE)
+        scoreboardRect = scoreboardSurface.get_rect()
+        scoreboardRect.left = 150
+        scoreboardRect.bottom = DISPLAYSURF.get_height() - 200
+        DISPLAYSURF.blit(scoreboardSurface, scoreboardRect)
 
     elif gameState == PLAY:
         # Gets the position of the cursor as a tuple with 2 values (x, y)
@@ -251,7 +251,7 @@ while True:
             shieldTimer = shieldTimer - 1
             if shieldTimer <= 0:
                 shieldOn = False
-                shieldTimer = 45
+                shieldTimer = FPS
 
         # Update and draw laser shots
         for i in range(maxShots):
@@ -285,26 +285,27 @@ while True:
         pygame.draw.circle(DISPLAYSURF, ORANGE, (explosionCenterX, explosionCenterY), 75)
         pygame.draw.circle(DISPLAYSURF, RED, (explosionCenterX, explosionCenterY), 50)
 
-        # Draw text
-        textSurface = scoreFont.render(("Score: " + str(score) + "  Shots Fired: " + str(totalNumOfShots)), True, BLACK, WHITE)
-        textRect = textSurface.get_rect()
-        textRect.left = 10
-        textRect.bottom = DISPLAYSURF.get_height() - 10
-        DISPLAYSURF.blit(textSurface, textRect)
+        # Draw scoreboard
+        scoreboardSurface = scoreFont.render(("Score: " + str(score) + "  Shots Fired: " + str(totalNumOfShots)), True, BLACK, WHITE)
+        scoreboardRect = scoreboardSurface.get_rect()
+        scoreboardRect.left = 10
+        scoreboardRect.bottom = DISPLAYSURF.get_height() - 10
+        DISPLAYSURF.blit(scoreboardSurface, scoreboardRect)
 
+        # Draw lives
         livesSurface = scoreFont.render(("Lives: " + str(UserLives)), True, BLACK, WHITE)
         livesRect = livesSurface.get_rect()
-        livesRect.left = DISPLAYSURF.get_width() - 80
-        textRect.bottom = DISPLAYSURF.get_height() - 10
+        livesRect.left = DISPLAYSURF.get_width() - 70
+        livesRect.bottom = DISPLAYSURF.get_height() - 10
         DISPLAYSURF.blit(livesSurface, livesRect)
 
 
     elif gameState == GAMEOVER:
-        textSurface = endFont.render(("Click to play again"), True, BLACK, WHITE)
-        textRect = textSurface.get_rect()
-        textRect.left = 120
-        textRect.bottom = DISPLAYSURF.get_height() - 200
-        DISPLAYSURF.blit(textSurface, textRect)
+        scoreboardSurface = endFont.render(("Click to play again"), True, BLACK, WHITE)
+        scoreboardRect = scoreboardSurface.get_rect()
+        scoreboardRect.left = 120
+        scoreboardRect.bottom = DISPLAYSURF.get_height() - 200
+        DISPLAYSURF.blit(scoreboardSurface, scoreboardRect)
 
     # Update the graphics
     pygame.display.update()
