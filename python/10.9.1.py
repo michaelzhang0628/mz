@@ -112,7 +112,7 @@ laserBolts = []
 # Loop to create 4 laser bolts
 for i in range(maxShots):
     # Add a laser bolt to the list of Rect objects.
-    laserBolts.append(pygame.Rect(-30, -20, 10, 20))
+    laserBolts.append(pygame.Rect(-30, DISPLAYSURF.get_height(), 10, 20))
     # The lasers will be 10 pixels wide and 20 pixels tall.
 
 # Create blasts, enemies shoots blasts when they die
@@ -158,6 +158,7 @@ while True:
         elif event.type == MOUSEBUTTONDOWN:
             if event.button == 1:
                 if gameState == BEGIN:
+                    # reset the game
                     score = 0
                     totalNumOfShots = 0
                     enemyAlive = []
@@ -165,7 +166,13 @@ while True:
                     gameState = PLAY
                     UserLives = 3
                     blast = []
+                    explosionCenterX = -100
+                    explosionCenterY = -100
                     explosionTime = FPS
+                    laserBolts = []
+                    for i in range(maxShots):
+                        # Add a laser bolt to the list of Rect objects.
+                        laserBolts.append(pygame.Rect(-30, DISPLAYSURF.get_height(), 10, 20))
                     for i in range(numEnemy):
                         blast.append(pygame.Rect(-60, -20, 20, 40))
                     for i in range(numEnemy):
@@ -177,7 +184,7 @@ while True:
                         enemyAlive.append(True)
                 elif gameState == PLAY:
                     totalNumOfShots += 1
-                    if laserBolts[numShots].bottom > 480:
+                    if laserBolts[numShots].bottom >= DISPLAYSURF.get_height():
                         # Add 6 to center the laser with the player.
                         laserBolts[numShots].x = UserX + 6
                         laserBolts[numShots].y = UserY
@@ -228,8 +235,8 @@ while True:
                         enemyAlive[i] = False
                         enemyKilled += 1
                         # Once Enemy is killed by a shot, move the shot outside the surface
-                        laserBolts[j].x = -20
-                        laserBolts[j].y = -30
+                        laserBolts[j].x = -30
+                        laserBolts[j].y = DISPLAYSURF.get_height()
                         # Blast is shot after Enemy is killed
                         blast[i].x = enemyXCoords[i]
                         blast[i].y = enemyYCoords[i]
