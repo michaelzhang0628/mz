@@ -77,7 +77,7 @@ playerImgx = 0
 playerImgy = 0
 
 # Set up the window (surface)
-DISPLAYSURF = pygame.display.set_mode((500, 400))
+DISPLAYSURF = pygame.display.set_mode((900, 600))
 image_url = "https://codehs.com/uploads/bea96ab515b168282eb7ba2911ff230e"
 image_str = urlopen(image_url).read()
 image_file = io.BytesIO(image_str)
@@ -92,7 +92,7 @@ moveYAmnts = []
 jumpCeiling = []
 startingXCoord = 20
 startingYCoord = playerImg.get_height() - 100
-numEnemy = 6
+numEnemy = 11
 enemyAlive = []
 enemyKilled = 0
 for i in range(numEnemy):
@@ -110,6 +110,7 @@ maxShots = 4
 # list of Rect objects for the laser bolts
 laserBolts = []
 # Loop to create 4 laser bolts
+laserBoltsSpeed = 10
 for i in range(maxShots):
     # Add a laser bolt to the list of Rect objects.
     laserBolts.append(pygame.Rect(-30, DISPLAYSURF.get_height(), 10, 20))
@@ -129,7 +130,7 @@ UserX = 0
 UserY = 50
 
 # Variable for core
-score = 0
+kills = 0
 totalNumOfShots = 0
 scoreFont = pygame.font.Font(pygame.font.get_default_font(), 17)
 beginFont = pygame.font.Font(pygame.font.get_default_font(), 30)
@@ -147,9 +148,13 @@ explosionCenterX = -100
 explosionCenterY = -100
 explosionTime = FPS
 
+timer = 0
+runningClock = True
+
 # Main Game Loop
 while True:
-
+    if runningClock == True:
+        timer += 1
     # Loop that handles events
     for event in pygame.event.get():
         if event.type == QUIT:
@@ -158,8 +163,8 @@ while True:
         elif event.type == MOUSEBUTTONDOWN:
             if event.button == 1:
                 if gameState == BEGIN:
-                    # reset the game
-                    score = 0
+                    # Reset the game
+                    kills = 0
                     totalNumOfShots = 0
                     enemyAlive = []
                     enemyKilled = 0
@@ -170,6 +175,9 @@ while True:
                     explosionCenterY = -100
                     explosionTime = FPS
                     laserBolts = []
+                    laserBoltsSpeed = 10
+                    timer = 0
+                    runningClock = True
                     for i in range(maxShots):
                         # Add a laser bolt to the list of Rect objects.
                         laserBolts.append(pygame.Rect(-30, DISPLAYSURF.get_height(), 10, 20))
@@ -183,8 +191,9 @@ while True:
                         jumpCeiling.append(random.randint(20, 70))
                         enemyAlive.append(True)
                 elif gameState == PLAY:
-                    totalNumOfShots += 1
                     if laserBolts[numShots].bottom >= DISPLAYSURF.get_height():
+                        # Moving laserBolts from outside the screen to inside the screen
+                        totalNumOfShots += 1
                         # Add 6 to center the laser with the player.
                         laserBolts[numShots].x = UserX + 6
                         laserBolts[numShots].y = UserY
@@ -196,16 +205,24 @@ while True:
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_s:
                 shieldOn = True
+            elif event.key == pygame.K_UP:
+                laserBoltsSpeed += 2
+                if laserBoltsSpeed > 18:
+                    laserBoltsSpeed = 18
+            elif event.key == pygame.K_DOWN:
+                laserBoltsSpeed -= 2
+                if laserBoltsSpeed < 2:
+                    laserBoltsSpeed = 2
 
     # Fill canvas
     DISPLAYSURF.blit(playerImg, (playerImgx, playerImgy))
 
     if gameState == BEGIN:
-        scoreboardSurface = beginFont.render(("Click to begin"), True, BLACK, WHITE)
-        scoreboardRect = scoreboardSurface.get_rect()
-        scoreboardRect.left = 150
-        scoreboardRect.bottom = DISPLAYSURF.get_height() - 200
-        DISPLAYSURF.blit(scoreboardSurface, scoreboardRect)
+        beginText = beginFont.render(("Click to begin"), True, BLACK, WHITE)
+        beginRect = beginText.get_rect()
+        beginRect.left = (DISPLAYSURF.get_width() - beginRect.width) / 2
+        beginRect.top = (DISPLAYSURF.get_height() - beginRect.height) / 2
+        DISPLAYSURF.blit(beginText, beginRect)
 
     elif gameState == PLAY:
         # Gets the position of the cursor as a tuple with 2 values (x, y)
@@ -220,8 +237,10 @@ while True:
             UserRect = drawUser(DISPLAYSURF, UserX, UserY)
 
         if enemyKilled == numEnemy:
+            runningClock = False
             gameState = GAMEOVER
         if UserLives == 0:
+            runningClock = False
             gameState = GAMEOVER
         for i in range(numEnemy):
             # Draw the Enemy if alive
@@ -231,7 +250,7 @@ while True:
                     # Colliderect takes a rect that is based on enemyXCoords[i] and enemyYCoords[i]
                     enemyRect = Rect(enemyXCoords[i], enemyYCoords[i] - 5, 30, 45)
                     if laserBolts[j].colliderect(enemyRect) and enemyAlive[i]:
-                        score += 5
+                        kills += 1
                         enemyAlive[i] = False
                         enemyKilled += 1
                         # Once Enemy is killed by a shot, move the shot outside the surface
@@ -263,7 +282,7 @@ while True:
         # Update and draw laser shots
         for i in range(maxShots):
             # Move the current laser 10 pixels down
-            laserBolts[i].move_ip(0, 10)
+            laserBolts[i].move_ip(0, laserBoltsSpeed)
             # Draw a rectangle with the current laser bolt
             pygame.draw.rect(DISPLAYSURF, PURPLE, laserBolts[i])
 
@@ -279,7 +298,7 @@ while True:
                 blast[i].x = -100
                 blast[i].y = -100
             # Move the current laser 10 pixels down
-            blast[i].move_ip(0, random.randint(-5, -1))
+            blast[i].move_ip(0, random.randint(-20, -1))
             # Draw a rectangle with the current laser bolt
             pygame.draw.rect(DISPLAYSURF, RED, blast[i])
 
@@ -293,26 +312,40 @@ while True:
         pygame.draw.circle(DISPLAYSURF, RED, (explosionCenterX, explosionCenterY), 50)
 
         # Draw scoreboard
-        scoreboardSurface = scoreFont.render(("Score: " + str(score) + "  Shots Fired: " + str(totalNumOfShots)), True, BLACK, WHITE)
-        scoreboardRect = scoreboardSurface.get_rect()
+        scoreboardText = scoreFont.render(("Kills: " + str(kills) + "   Shots: " + str(totalNumOfShots) + "   Lives: " + str(UserLives) + "   Time: " + str(round(timer / 15, 2))), True, BLACK, WHITE)
+        scoreboardRect = scoreboardText.get_rect()
         scoreboardRect.left = 10
         scoreboardRect.bottom = DISPLAYSURF.get_height() - 10
-        DISPLAYSURF.blit(scoreboardSurface, scoreboardRect)
+        DISPLAYSURF.blit(scoreboardText, scoreboardRect)
 
-        # Draw lives
-        livesSurface = scoreFont.render(("Lives: " + str(UserLives)), True, BLACK, WHITE)
-        livesRect = livesSurface.get_rect()
-        livesRect.left = DISPLAYSURF.get_width() - 70
-        livesRect.bottom = DISPLAYSURF.get_height() - 10
-        DISPLAYSURF.blit(livesSurface, livesRect)
-
+        # Draw laserBoltsSpeed
+        laserBoltsSpeedText = scoreFont.render(("Laser Bolts Speed: " + str(laserBoltsSpeed)), True, BLACK, WHITE)
+        laserBoltsSpeedRect = laserBoltsSpeedText.get_rect()
+        laserBoltsSpeedRect.left = DISPLAYSURF.get_width() - 190
+        laserBoltsSpeedRect.bottom = DISPLAYSURF.get_height() - 10
+        DISPLAYSURF.blit(laserBoltsSpeedText, laserBoltsSpeedRect)
 
     elif gameState == GAMEOVER:
-        scoreboardSurface = endFont.render(("Click to play again"), True, BLACK, WHITE)
-        scoreboardRect = scoreboardSurface.get_rect()
-        scoreboardRect.left = 120
-        scoreboardRect.bottom = DISPLAYSURF.get_height() - 200
-        DISPLAYSURF.blit(scoreboardSurface, scoreboardRect)
+        endText = endFont.render(("Click to play again"), True, BLACK, WHITE)
+        endRect = endText.get_rect()
+        endRect.left = (DISPLAYSURF.get_width() - endRect.width) / 2
+        endRect.top = (DISPLAYSURF.get_height() - endRect.height) / 2
+        DISPLAYSURF.blit(endText, endRect)
+
+        # Draw scoreboard on end screen
+        endTime = round(timer / 15, 2)
+        endScoreboardText = endFont.render(("Kills: " + str(kills) + "   Shots: " + str(totalNumOfShots) + "   Lives: " + str(UserLives) + "   Time: " + str(endTime)), True, BLACK, WHITE)
+        endScoreboardRect = endScoreboardText.get_rect()
+        endScoreboardRect.left = (DISPLAYSURF.get_width() - endScoreboardRect.width) / 2
+        endScoreboardRect.top = (DISPLAYSURF.get_height() + endRect.height) / 2
+        DISPLAYSURF.blit(endScoreboardText, endScoreboardRect)
+
+        totalEfficiencyScore = kills * 10 - totalNumOfShots * 3 + UserLives * 20 - endTime
+        totalEfficiencyScoreText = endFont.render(("Efficiency Score: " + str(totalEfficiencyScore)), True, BLACK, WHITE)
+        totalEfficiencyScoreRect = totalEfficiencyScoreText.get_rect()
+        totalEfficiencyScoreRect.left = (DISPLAYSURF.get_width() - totalEfficiencyScoreRect.width) / 2
+        totalEfficiencyScoreRect.top = (DISPLAYSURF.get_height() + endRect.height) / 2 + totalEfficiencyScoreRect.height
+        DISPLAYSURF.blit(totalEfficiencyScoreText, totalEfficiencyScoreRect)
 
     # Update the graphics
     pygame.display.update()
