@@ -92,7 +92,7 @@ moveYAmnts = []
 jumpCeiling = []
 startingXCoord = 20
 startingYCoord = playerImg.get_height() - 100
-numEnemy = 11
+numEnemy = 2
 enemyAlive = []
 enemyKilled = 0
 for i in range(numEnemy):
@@ -123,7 +123,7 @@ for i in range(numEnemy):
 
 # Shield Variable
 shieldOn = False
-shieldTimer = 45
+shieldTimer = 3 * FPS
 
 # Variable for User
 UserX = 0
@@ -178,6 +178,8 @@ while True:
                     laserBoltsSpeed = 10
                     timer = 0
                     runningClock = True
+                    shieldOn = False
+                    shieldTimer = 3 * FPS
                     for i in range(maxShots):
                         # Add a laser bolt to the list of Rect objects.
                         laserBolts.append(pygame.Rect(-30, DISPLAYSURF.get_height(), 10, 20))
@@ -218,7 +220,7 @@ while True:
     DISPLAYSURF.blit(playerImg, (playerImgx, playerImgy))
 
     if gameState == BEGIN:
-        beginText = beginFont.render(("Click to begin"), True, BLACK, WHITE)
+        beginText = beginFont.render(("Click to begin"), True, BLACK)
         beginRect = beginText.get_rect()
         beginRect.left = (DISPLAYSURF.get_width() - beginRect.width) / 2
         beginRect.top = (DISPLAYSURF.get_height() - beginRect.height) / 2
@@ -277,7 +279,7 @@ while True:
             shieldTimer = shieldTimer - 1
             if shieldTimer <= 0:
                 shieldOn = False
-                shieldTimer = FPS
+                shieldTimer = 3 * FPS
 
         # Update and draw laser shots
         for i in range(maxShots):
@@ -312,21 +314,21 @@ while True:
         pygame.draw.circle(DISPLAYSURF, RED, (explosionCenterX, explosionCenterY), 50)
 
         # Draw scoreboard
-        scoreboardText = scoreFont.render(("Kills: " + str(kills) + "   Shots: " + str(totalNumOfShots) + "   Lives: " + str(UserLives) + "   Time: " + str(round(timer / 15, 2))), True, BLACK, WHITE)
+        scoreboardText = scoreFont.render(("Kills: " + str(kills) + "   Shots: " + str(totalNumOfShots) + "   Lives: " + str(UserLives) + "   Time: " + str(round(timer / 15, 2))), True, WHITE, BLACK)
         scoreboardRect = scoreboardText.get_rect()
         scoreboardRect.left = 10
         scoreboardRect.bottom = DISPLAYSURF.get_height() - 10
         DISPLAYSURF.blit(scoreboardText, scoreboardRect)
 
         # Draw laserBoltsSpeed
-        laserBoltsSpeedText = scoreFont.render(("Laser Bolts Speed: " + str(laserBoltsSpeed)), True, BLACK, WHITE)
+        laserBoltsSpeedText = scoreFont.render(("Laser Bolts Speed: " + str(laserBoltsSpeed)), True, WHITE, BLACK)
         laserBoltsSpeedRect = laserBoltsSpeedText.get_rect()
         laserBoltsSpeedRect.left = DISPLAYSURF.get_width() - 190
         laserBoltsSpeedRect.bottom = DISPLAYSURF.get_height() - 10
         DISPLAYSURF.blit(laserBoltsSpeedText, laserBoltsSpeedRect)
 
     elif gameState == GAMEOVER:
-        endText = endFont.render(("Click to play again"), True, BLACK, WHITE)
+        endText = endFont.render(("Click to play again"), True, BLACK)
         endRect = endText.get_rect()
         endRect.left = (DISPLAYSURF.get_width() - endRect.width) / 2
         endRect.top = (DISPLAYSURF.get_height() - endRect.height) / 2
@@ -334,14 +336,14 @@ while True:
 
         # Draw scoreboard on end screen
         endTime = round(timer / 15, 2)
-        endScoreboardText = endFont.render(("Kills: " + str(kills) + "   Shots: " + str(totalNumOfShots) + "   Lives: " + str(UserLives) + "   Time: " + str(endTime)), True, BLACK, WHITE)
+        endScoreboardText = endFont.render(("Kills: " + str(kills) + "   Shots: " + str(totalNumOfShots) + "   Lives: " + str(UserLives) + "   Time: " + str(endTime)), True, BLACK)
         endScoreboardRect = endScoreboardText.get_rect()
         endScoreboardRect.left = (DISPLAYSURF.get_width() - endScoreboardRect.width) / 2
         endScoreboardRect.top = (DISPLAYSURF.get_height() + endRect.height) / 2
         DISPLAYSURF.blit(endScoreboardText, endScoreboardRect)
 
-        totalEfficiencyScore = kills * 10 - totalNumOfShots * 3 + UserLives * 20 - endTime
-        totalEfficiencyScoreText = endFont.render(("Efficiency Score: " + str(totalEfficiencyScore)), True, BLACK, WHITE)
+        totalEfficiencyScore = round(kills * 10 - totalNumOfShots * 3 + UserLives * 20 - endTime, 2)
+        totalEfficiencyScoreText = endFont.render(("Efficiency Score: " + str(totalEfficiencyScore)), True, BLACK)
         totalEfficiencyScoreRect = totalEfficiencyScoreText.get_rect()
         totalEfficiencyScoreRect.left = (DISPLAYSURF.get_width() - totalEfficiencyScoreRect.width) / 2
         totalEfficiencyScoreRect.top = (DISPLAYSURF.get_height() + endRect.height) / 2 + totalEfficiencyScoreRect.height
