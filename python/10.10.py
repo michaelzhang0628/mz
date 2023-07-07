@@ -198,3 +198,5 @@ while True:
 
     pygame.display.update()
     fpsClock.tick(FPS)
+
+# TODO put colors and make it pretty
