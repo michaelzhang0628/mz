@@ -4,6 +4,10 @@ from python.sort import *
 
 
 class Test(TestCase):
+    def test_get_min(self):
+        self.assertEqual(-11,  getMin([5, 2, 9, -11]))
+        self.assertEqual(0,  getMin([0, 3]))
+
     def test_sort1_int(self):
         self.assertSequenceEqual([0, 1, 2, 3, 9], sort1([1, 3, 2, 9, 0]))
         self.assertSequenceEqual([1, 1, 3, 5, 12], sort1([5, 1, 1, 12, 3]))
@@ -17,7 +21,6 @@ class Test(TestCase):
         self.assertSequenceEqual([1, 2, 3], insertNumToSortedList(3, [1, 2]))
         self.assertSequenceEqual([1, 3, 5], insertNumToSortedList(3, [1, 5]))
         self.assertSequenceEqual([0, 1, 5], insertNumToSortedList(0, [1, 5]))
-
 
     def test_sort2_int(self):
         self.assertSequenceEqual([0, 1, 2, 3, 9], sort2([1, 3, 2, 9, 0]))
