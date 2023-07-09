@@ -1,9 +1,7 @@
 import random
 import time
 
-from python.sort1 import sort1
-from python.sort2 import sort2
-
+from python.sort import sort2, sort1
 
 myList = []
 for i in range(10000):
