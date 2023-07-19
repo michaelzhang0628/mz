@@ -1,12 +1,12 @@
 from math import sqrt
 
-def fibonacci_recursive(term):
-    if term <= 0:
+def fibonacci_recursive(n):
+    if n <= 0:
         return 0
-    elif term == 1:
+    elif n == 1:
         return 1
     else:
-        return fibonacci_recursive(term - 1) + fibonacci_recursive(term - 2)
+        return fibonacci_recursive(n - 1) + fibonacci_recursive(n - 2)
 
 
 golden_ratio= sqrt(5) / 2 + 0.5
