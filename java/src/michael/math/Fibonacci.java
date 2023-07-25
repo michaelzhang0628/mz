@@ -1,3 +1,4 @@
+package michael.math;
 public class Fibonacci {
 
 	private static int f(int n) {

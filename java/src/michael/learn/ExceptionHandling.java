@@ -1,3 +1,4 @@
+package michael.learn;
 import java.util.Scanner;
 
 public class ExceptionHandling {

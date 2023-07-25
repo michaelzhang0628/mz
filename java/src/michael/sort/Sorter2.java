@@ -1,3 +1,5 @@
+package michael.sort;
+
 import java.util.List;
 
 public class Sorter2 extends AbstractSearchSorter implements Sorter {

@@ -1,3 +1,4 @@
+package michael.sort;
 import java.util.List;
 
 public interface Sorter {

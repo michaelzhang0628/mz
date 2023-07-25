@@ -1,3 +1,4 @@
+package michael.math;
 public class Factorial {
 
 	private static int f(int n) {
