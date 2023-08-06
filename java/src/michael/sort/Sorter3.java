@@ -3,7 +3,6 @@ package michael.sort;
 import java.util.List;
 
 public class Sorter3 extends Sorter2 implements Sorter {
-
     @Override
     public int searchInOrderedList(int x, List<Integer> sortedList, int start, int length) {
         if (length < 30) {

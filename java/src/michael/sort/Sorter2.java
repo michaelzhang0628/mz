@@ -4,6 +4,10 @@ import java.util.List;
 
 public class Sorter2 extends AbstractSearchSorter implements Sorter {
 
+    public Sorter2() {
+        System.out.println("Sorter2 is called");
+    }
+
     @Override
     public int searchInOrderedList(int x, List<Integer> sortedList, int start, int length) {
         return searchLinear(x, sortedList, start, length);

@@ -5,6 +5,11 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Sorter1 implements Sorter {
+    
+    public Sorter1() {
+        System.out.println("Sorter1 is called");
+    }
+
     private int getMin(List<Integer> list) {
         int min = list.get(0);
         int listSize = list.size();
