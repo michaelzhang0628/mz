@@ -1,6 +1,6 @@
 package michael.freeresponse;
 
-public class DiscountItem {
+public class DiscountItem extends Object {
     private double price;
     private double discountRate;
     private String description;

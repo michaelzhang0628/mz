@@ -3,7 +3,7 @@ public class HelloWorld {
 	public final static void main(String[] args) {
 	   
 		System.out.println("Michael says Hello World");
-        Student mz = new Student("Michael", 15, 10);
+        Student mz = new Student("Michael", 15, 10, "Mr. D");
         System.out.println("name:" + mz.getName());
         System.out.println("age:" + mz.getAge());
         System.out.println("grade:" + mz.getGrade());
