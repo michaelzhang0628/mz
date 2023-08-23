@@ -1,4 +1,5 @@
 package michael.freeresponse;
+
 import java.util.Scanner;
 
 public class IndividualStudyModule {
@@ -10,7 +11,6 @@ public class IndividualStudyModule {
     private int score;
     private String password;
     private Scanner scanner;
-    
 
     public IndividualStudyModule(int aScore, String p) {
         score = aScore;
@@ -30,14 +30,11 @@ public class IndividualStudyModule {
         String str = "";
         if (score <= 40) {
             str = BAD;
-        }
-        else if (score <= 60) {
+        } else if (score <= 60) {
             str = LESS_BAD;
-        }
-        else if (score <= 80) {
+        } else if (score <= 80) {
             str = LESS_GOOD;
-        }
-        else {
+        } else {
             str = GOOD;
         }
         return str;
@@ -56,10 +53,10 @@ public class IndividualStudyModule {
         }
         return false;
     }
-    
+
     public final static void main(String[] args) {
         IndividualStudyModule m = new IndividualStudyModule(80, "z");
-        //System.out.println("Got the right password? " + m.enterPassword());   
-        System.out.println("How was your performance for this unit? " + m.assessProgress());   
+        // System.out.println("Got the right password? " + m.enterPassword());
+        System.out.println("How was your performance for this unit? " + m.assessProgress());
     }
 }

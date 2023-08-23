@@ -36,4 +36,20 @@ class QuadraticFunctionTest {
         assertFalse(q.isUShaped());
     }
 
+    @Test
+    void testGetRoots() {
+        QuadraticFunction q = new QuadraticFunction(1, 3, 2);
+        float[] roots = q.getRoots();
+        assertEquals(2, roots.length);
+        assertEquals(-2, roots[0]);
+        assertEquals(-1, roots[1]);
+        q = new QuadraticFunction(1, 0, 0);
+        roots = q.getRoots();
+        assertEquals(1, roots.length);
+        assertEquals(0, roots[0]);
+        q = new QuadraticFunction(-1, 2, -4);
+        roots = q.getRoots();
+        assertEquals(0, roots.length);
+    }
+
 }

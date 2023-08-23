@@ -11,6 +11,7 @@ class HexDecimalTest {
         HexDecimal h = new HexDecimal("1d");
         assertEquals(29, h.getDecimal());
         assertEquals("1d", h.toString());
+        HexDecimal h1 = h;
         h = new HexDecimal("1D");
         assertEquals(29, h.getDecimal());
         assertEquals("1d", h.toString());
@@ -28,5 +29,4 @@ class HexDecimalTest {
         assertEquals(1196013, h.getDecimal());
         assertEquals("123fed", h.toString());
     }
-
 }

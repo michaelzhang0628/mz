@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Sorter1 implements Sorter {
-    
+
     public Sorter1() {
         System.out.println("Sorter1 is called");
     }

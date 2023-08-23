@@ -20,14 +20,14 @@ public class Screen {
         }
     }
 
- // precondition: 0 <= row <=
- // data.length - 1;
- // 0 <= col <= numCols - 1
- // postcondition: returns the pixel at
- // the given row and col
- // if it exists (black)
- // or null if the pixel
- // doesn't exist (white)
+    // precondition: 0 <= row <=
+    // data.length - 1;
+    // 0 <= col <= numCols - 1
+    // postcondition: returns the pixel at
+    // the given row and col
+    // if it exists (black)
+    // or null if the pixel
+    // doesn't exist (white)
     public Pixel pixelAt(int row, int col) {
         if (col < numCols) {
             if (col <= this.numCols - 1 && row <= this.numRows - 1) {
@@ -42,18 +42,18 @@ public class Screen {
         return null;
     }
 
- // precondition: 0 <= row <=
- // data.length - 1;
- // 0 <= col <= numCols - 1;
- // the pixel at row, col
- // does not exist
- // in this Screen
- // postcondition: adds the pixel at
- // the given row and col
- // so that pixels in a
- // given row of data are
- // in increasing column
- // order
+    // precondition: 0 <= row <=
+    // data.length - 1;
+    // 0 <= col <= numCols - 1;
+    // the pixel at row, col
+    // does not exist
+    // in this Screen
+    // postcondition: adds the pixel at
+    // the given row and col
+    // so that pixels in a
+    // given row of data are
+    // in increasing column
+    // order
     public void pixelOn(int row, int col) {
         if (col < numCols) {
             boolean isBlack = false;
@@ -65,7 +65,7 @@ public class Screen {
             }
             if (!isBlack) {
                 data[row].add(new Pixel(row, col));
-            } 
-        }  
+            }
+        }
     }
 }

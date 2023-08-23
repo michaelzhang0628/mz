@@ -24,7 +24,7 @@ public class PartTimeEmployee extends Employee {
             this.isUnionMember = !this.isUnionMember;
         }
     }
-    
+
     @Override
     public double getActualPay() {
         return super.getActualPay() * fraction;

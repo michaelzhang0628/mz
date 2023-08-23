@@ -6,10 +6,10 @@ public class FourDigitNumber {
     private int hundDigit;
     private int tensDigit;
     private int onesDigit;
-    
+
     // creates a FourDigitNumber from aValue
     // 999 <= aValue <= 9999
-    
+
     public FourDigitNumber(int aValue) {
         value = aValue;
         thouDigit = value / 1000;
@@ -21,19 +21,19 @@ public class FourDigitNumber {
     public int getValue() {
         return this.value;
     }
-    
+
     public int getThouDigit() {
         return this.thouDigit;
     }
-    
+
     public int getHundDigit() {
         return this.hundDigit;
     }
-    
+
     public int getTensDigit() {
         return this.tensDigit;
     }
-    
+
     public int getOnesDigit() {
         return this.onesDigit;
     }

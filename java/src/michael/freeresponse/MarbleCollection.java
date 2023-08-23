@@ -50,6 +50,3 @@ public class MarbleCollection {
         return numberOfMarbleColor;
     }
 }
-
-
-

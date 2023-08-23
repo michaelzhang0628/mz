@@ -11,7 +11,7 @@ public class Employee extends Citizen {
     public double getSalary() {
         return salary;
     }
-    
+
     public double getActualPay() {
         return salary;
     }

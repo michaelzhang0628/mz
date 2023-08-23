@@ -5,10 +5,10 @@ public class Student {
     private int age = 0;
     private int grade = 100;
     private String instructor;
-    
+
     // static in front of a variable means it is a class variable
-    static int absence = 0; 
-    
+    static int absence = 0;
+
     public Student(String n) {
         this.name = n;
     }
@@ -56,7 +56,7 @@ public class Student {
     public void punch(int count) {
         System.out.println("Punch " + count + " times.");
     }
-    
+
     // static in front of a method means it is a class method
     public static void absent() {
         absence++;

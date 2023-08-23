@@ -38,7 +38,7 @@ class TravelPlanTest {
         t2 = new Tour(3, 8, 18, "");
         assertTrue(testPlan.checkTourConflict(t1, t2));
     }
-    
+
     @Test
     void testRealWorld() {
         TravelPlan lvTrip = new TravelPlan("Las Vegas");
@@ -58,6 +58,6 @@ class TravelPlanTest {
             System.out.println("Can not add Dance");
         }
         System.out.println(lvTrip.getTours());
-   }
+    }
 
 }

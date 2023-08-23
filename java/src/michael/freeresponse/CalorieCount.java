@@ -34,7 +34,7 @@ public class CalorieCount {
     public boolean onTrack() {
         return caloriesIntake <= caloriesLimit;
     }
-    
+
     private double roundToTwoDigitDecimal(double num) {
         return ((double) Math.round(num * 100)) / 100;
     }

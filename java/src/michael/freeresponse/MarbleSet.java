@@ -3,7 +3,7 @@ package michael.freeresponse;
 public class MarbleSet {
     String color;
     int numMarbles;
-    
+
     /** Constructs a new MarbleSet object */
     public MarbleSet(String color, int numMarbles) {
         this.color = color;

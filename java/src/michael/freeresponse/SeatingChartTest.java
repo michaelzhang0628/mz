@@ -8,10 +8,8 @@ class SeatingChartTest {
 
     @Test
     void testConstructor() {
-        Name[] names = {new Name("Zhang", "Michael"), 
-                new Name("Zhang", "G"), 
-                new Name("Zhang", "C"), 
-                new Name("Zhang", "Keke")};
+        Name[] names = { new Name("Zhang", "Michael"), new Name("Zhang", "G"), new Name("Zhang", "C"),
+                new Name("Zhang", "Keke") };
         SeatingChart s = new SeatingChart(names, 4, 3);
         assertEquals(4, s.getRows());
         assertEquals(3, s.getCols());
@@ -19,8 +17,8 @@ class SeatingChartTest {
         boolean foundMZ = false;
         boolean foundCZ = false;
         int taken = 0;
-        for (int i=0; i<seats.length; i++) {
-            for (int j=0; j<seats[i].length;j++) {
+        for (int i = 0; i < seats.length; i++) {
+            for (int j = 0; j < seats[i].length; j++) {
                 if (!seats[i][j].equals("")) {
                     taken++;
                     if (seats[i][j].equals("Zhang, Michael")) {

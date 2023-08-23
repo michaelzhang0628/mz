@@ -25,13 +25,13 @@ class PigLatinConverterTest {
         expectedWords.add("lovely");
         expectedWords.add("day");
         PigLatinConverter conv = new PigLatinConverter("What a lovely day");
-        assertEquals(expectedWords, conv.getLineWords());       
+        assertEquals(expectedWords, conv.getLineWords());
     }
-    
+
     @Test
     void pigLatin() {
         PigLatinConverter conv = new PigLatinConverter("What a lovely day");
         conv.pigLatin();
-        assertEquals("hatWay ayay ovelylay ayday", conv.getLine());       
+        assertEquals("hatWay ayay ovelylay ayday", conv.getLine());
     }
 }

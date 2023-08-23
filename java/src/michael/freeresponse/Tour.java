@@ -3,13 +3,13 @@ package michael.freeresponse;
 public class Tour {
     private int actDate;
     // times are represented in military format
-    // 1430 for 2:30 pm  
+    // 1430 for 2:30 pm
     private int startTime;
-    private int endTime; 
+    private int endTime;
     private String activity;
 
-    /* Constructs a Tour
-     * All instance fields are initialized from parameters
+    /*
+     * Constructs a Tour All instance fields are initialized from parameters
      */
 
     Tour(int actDate, int startTime, int endTime, String activity) {
@@ -34,10 +34,10 @@ public class Tour {
     public String getActivity() {
         return activity;
     }
-    
+
     @Override
     public String toString() {
-        return super.toString() + " " + activity + " from " + this.startTime + " to " + this.endTime + " on " + this.actDate;
+        return super.toString() + " " + activity + " from " + this.startTime + " to " + this.endTime + " on "
+                + this.actDate;
     }
 }
-

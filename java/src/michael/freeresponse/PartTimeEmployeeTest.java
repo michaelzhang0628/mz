@@ -16,7 +16,7 @@ class PartTimeEmployeeTest {
         mz.changeUnionStatus();
         assertTrue(mz.isUnionMember());
 
-        // more than 15k 
+        // more than 15k
         mz = new PartTimeEmployee("Michael", "Mt. Laurel", true, 20000, 0.5, true);
         mz.changeUnionStatus();
         assertFalse(mz.isUnionMember());
@@ -30,7 +30,7 @@ class PartTimeEmployeeTest {
         Employee gz = new Employee("Dad", "nowhere", true, 10000);
         assertEquals(10000, gz.getSalary());
         assertEquals(10000, gz.getActualPay());
-        
+
         PartTimeEmployee mz = new PartTimeEmployee("Michael", "Mt. Laurel", true, 10000, 0.5, false);
         assertEquals(10000, mz.getSalary());
         assertEquals(5000, mz.getActualPay());

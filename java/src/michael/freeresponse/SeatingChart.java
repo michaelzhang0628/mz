@@ -21,11 +21,11 @@ public class SeatingChart {
             }
         }
         for (int i = 0; i < names.length; i++) {
-            int randomRow = (int)(Math.random() * rows);
-            int randomCol = (int)(Math.random() * cols);
+            int randomRow = (int) (Math.random() * rows);
+            int randomCol = (int) (Math.random() * cols);
             while (!(chart[randomRow][randomCol].equals(""))) {
-                randomRow = (int)(Math.random() * rows);
-                randomCol = (int)(Math.random() * cols);
+                randomRow = (int) (Math.random() * rows);
+                randomCol = (int) (Math.random() * cols);
             }
             chart[randomRow][randomCol] = names[i].toString();
         }
@@ -34,15 +34,15 @@ public class SeatingChart {
     public int getRows() {
         return rows;
     }
-    
+
     public int getCols() {
         return cols;
     }
-    
+
     public String[][] getChart() {
         return chart;
     }
-    
+
     /**
      * Returns a string containing all elements of the chart array in row-major
      * order. The method should return a string containing all the elements in the
@@ -53,7 +53,7 @@ public class SeatingChart {
      */
 
     public String toString() {
-        StringBuffer str = new StringBuffer();
+        StringBuilder str = new StringBuilder();
         for (int i = 0; i < chart.length; i++) {
             for (int j = 0; j < chart[i].length; j++) {
                 str.append(padWithSpaces(chart[i][j]));
@@ -68,7 +68,7 @@ public class SeatingChart {
      * long.
      */
     private String padWithSpaces(String s) {
-        StringBuffer str = new StringBuffer(s);
+        StringBuilder str = new StringBuilder(s);
         for (int a = s.length(); a < 35; a++) {
             str.append(' ');
         }
