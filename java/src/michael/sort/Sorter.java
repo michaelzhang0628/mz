@@ -9,5 +9,5 @@ public interface Sorter {
      * @param unsortedList A list of unsorted integers
      * @return A list of integers that is sorted
      */
-    public List<Integer> sort(List<Integer> unsortedList);
+    public List<Comparable> sort(List<Comparable> unsortedList);
 }

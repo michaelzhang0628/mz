@@ -26,10 +26,15 @@ class SorterTests {
         validateSorter(new Sorter3());
     }
 
-    private List<Integer> randomIntList() {
-        List<Integer> testData = new ArrayList<Integer>();
+    @Test
+    void testBubbleSorter() {
+        validateSorter(new BubbleSorter());
+    }
+
+    private List<Comparable> randomIntList() {
+        List<Comparable> testData = new ArrayList<Comparable>();
         Random rand = new Random();
-        for (int i = 0; i <= 50000; i++) {
+        for (int i = 0; i <= 10000; i++) {
             int intRandom = rand.nextInt(2000) - 1000;
             testData.add(intRandom);
         }
@@ -38,7 +43,7 @@ class SorterTests {
 
     @Test
     void testSorterPerformance() {
-        List<Integer> testData = randomIntList();
+        List<Comparable> testData = randomIntList();
 
         Sorter firstSorter = new Sorter1();
         long beginSorter1 = new Date().getTime();
@@ -57,34 +62,44 @@ class SorterTests {
         thirdSorter.sort(testData);
         long endSorter3 = new Date().getTime();
         System.out.println("Sorter3 time: " + (endSorter3 - beginSorter3 + " milliseconds"));
-    }
+
+        Sorter bubbleSorter = new BubbleSorter();
+        long beginBubbleSorter = new Date().getTime();
+        bubbleSorter.sort(testData);
+        long endBubbleSorter = new Date().getTime();
+        System.out.println("BubbleSorter time: " + (endBubbleSorter - beginBubbleSorter + " milliseconds"));
+}
 
     @Test
-    void testAll3Sorters() {
-        List<Integer> testData = randomIntList();
+    void testAll4Sorters() {
+        List<Comparable> testData = randomIntList();
 
         Sorter firstSorter = new Sorter1();
-        List<Integer> sorter1Result = firstSorter.sort(testData);
+        List<Comparable> sorter1Result = firstSorter.sort(testData);
 
         Sorter secondSorter = new Sorter2();
-        List<Integer> sorter2Result = secondSorter.sort(testData);
+        List<Comparable> sorter2Result = secondSorter.sort(testData);
 
         Sorter thirdSorter = new Sorter3();
-        List<Integer> sorter3Result = thirdSorter.sort(testData);
+        List<Comparable> sorter3Result = thirdSorter.sort(testData);
+        
+        Sorter bubbleSorter = new BubbleSorter();
+        List<Comparable> bubbleSorterResult = bubbleSorter.sort(testData);
 
         assertEquals(sorter1Result, sorter2Result);
         assertEquals(sorter1Result, sorter3Result);
+        assertEquals(sorter1Result, bubbleSorterResult);
     }
 
     private void validateSorter(Sorter sorter) {
-        List<Integer> testdata = new ArrayList<Integer>();
+        List<Comparable> testdata = new ArrayList<Comparable>();
         testdata.add(1);
         testdata.add(3);
         testdata.add(2);
         testdata.add(9);
         testdata.add(0);
 
-        List<Integer> expected = new ArrayList<Integer>();
+        List<Comparable> expected = new ArrayList<Comparable>();
         expected.add(0);
         expected.add(1);
         expected.add(2);
@@ -92,7 +107,6 @@ class SorterTests {
         expected.add(9);
 
         assertEquals(expected, sorter.sort(testdata));
-        assertTrue(expected.size() == 5);
     }
 
 }
