@@ -1,5 +1,6 @@
 package michael.sort;
 
+import java.util.Comparator;
 import java.util.List;
 
 /*
@@ -26,7 +27,23 @@ public class BubbleSorter implements Sorter {
                     dirty = true;
                 }
             }
-        }   
+        }
+        return unsortedList;
+    }
+
+    public List sort(List unsortedList, Comparator comparator) {
+        boolean dirty = true;
+        while (dirty) {
+            dirty = false;
+            for (int i = 0; i < unsortedList.size() - 1; i++) {
+                if (comparator.compare(unsortedList.get(i), unsortedList.get(i + 1)) > 0) {
+                    Object a = unsortedList.get(i + 1);
+                    unsortedList.set(i + 1, unsortedList.get(i));
+                    unsortedList.set(i, a);
+                    dirty = true;
+                }
+            }
+        }
         return unsortedList;
     }
 }

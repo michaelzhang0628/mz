@@ -68,7 +68,7 @@ class SorterTests {
         bubbleSorter.sort(testData);
         long endBubbleSorter = new Date().getTime();
         System.out.println("BubbleSorter time: " + (endBubbleSorter - beginBubbleSorter + " milliseconds"));
-}
+    }
 
     @Test
     void testAll4Sorters() {
@@ -82,7 +82,7 @@ class SorterTests {
 
         Sorter thirdSorter = new Sorter3();
         List<Comparable> sorter3Result = thirdSorter.sort(testData);
-        
+
         Sorter bubbleSorter = new BubbleSorter();
         List<Comparable> bubbleSorterResult = bubbleSorter.sort(testData);
 
