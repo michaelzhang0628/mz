@@ -10,16 +10,13 @@ public class Game {
     private Level levelThree;
     
     public Game() {
-        // TODO     
     }
     
     public boolean isBonus() {
-        // TODO
         return false;
     }
     
     public void play() {
-        // TODO
     }
     
     public int getScore() {
