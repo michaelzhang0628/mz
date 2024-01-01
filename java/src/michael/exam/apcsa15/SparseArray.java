@@ -1,6 +1,7 @@
 package michael.exam.apcsa15;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class SparseArray {
@@ -53,13 +54,13 @@ public class SparseArray {
     }
 
     public void removeColumn(int col) {
-        // TODO with iterator
-        for (int i = entries.size() - 1; i >= 0; i--) {
-            SparseArrayEntry entry = entries.get(i);
+        Iterator<SparseArrayEntry> it = entries.iterator();
+        while (it.hasNext()) {
+            SparseArrayEntry entry = it.next();
             if (entry.getCol() == col) {
-                entries.remove(i);
+                it.remove();
             } else if (entry.getCol() > col) {
-                entries.set(i, new SparseArrayEntry(entry.getRow(), entry.getCol() - 1, entry.getValue()));
+                entry.setCol(entry.getCol() - 1);
             }
         }
         numCols--;

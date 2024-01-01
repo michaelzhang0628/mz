@@ -7,17 +7,15 @@ public class HiddenWord {
     }
 
     public String getHint(String guess) {
-        // TODO what if guess have different number of characters
-        // TODO replace substring with charAt for efficiency
         String hint = "";
-        for (int i = 0; i < word.length(); i++) {
-            String guessLetter = guess.substring(i, i + 1);
-            if (word.substring(i, i + 1).equals(guessLetter)) {
-                hint += guessLetter;
-            } else if (word.indexOf(guessLetter) != -1) {
+        for (int i = 0; i < guess.length(); i++) {
+            if (i < word.length() && guess.charAt(i) == word.charAt(i)) {
+                hint += word.charAt(i);
+            } else if (word.indexOf(guess.charAt(i)) != -1) {
                 hint += "+";
-            } else
-                hint += "*";
+            } else {
+                hint += "*";      
+            }
         }
         return hint;
     }

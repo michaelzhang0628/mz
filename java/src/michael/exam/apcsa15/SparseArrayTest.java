@@ -16,18 +16,17 @@ class SparseArrayTest {
         sa.setValueAt(7, 6, 2);
         assertEquals(5, sa.getNumCols());
         assertEquals(0, sa.getValueAt(7, 6));
+        assertEquals(5, sa.getValueAt(1, 1));
         assertEquals(-9, sa.getValueAt(3, 1));
-        // TODO assert 1,1 and 1,4
         assertEquals(1, sa.getValueAt(2, 0));
         assertEquals(0, sa.getValueAt(3, 3));
         assertEquals(0, sa.getValueAt(5, 3));
         sa.removeColumn(1);
         assertEquals(4, sa.getNumCols());
-        // TODO assert 1,1 and 1,4
-        assertEquals(4, sa.getValueAt(1, 3));
-        assertEquals(1, sa.getValueAt(2, 0));
         assertEquals(0, sa.getValueAt(1, 1));
         assertEquals(0, sa.getValueAt(3, 1));
+        assertEquals(4, sa.getValueAt(1, 3));
+        assertEquals(1, sa.getValueAt(2, 0));
     }
 
 }

@@ -23,6 +23,10 @@ public class SparseArrayEntry {
         return value;
     }
     
+    public void setCol(int col) {
+        this.col = col;
+    }
+
     public void setValue(int value) {
         this.value = value;
     }

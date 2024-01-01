@@ -1,0 +1,8 @@
+Item [name=avocado, price=1.68, size=8, category=P]
+Item [name=milk, price=1.25, size=64, category=D]
+Item [name=chicken, price=4.48, size=64, category=M]
+Item [name=broccoli, price=0.98, size=16, category=P]
+Item [name=yogurt, price=0.75, size=16, category=D]
+Item [name=spinach, price=1.76, size=16, category=P]
+Item [name=cornedbeef, price=7.99, size=48, category=M]
+Item [name=porkchops, price=2.24, size=32, category=M]

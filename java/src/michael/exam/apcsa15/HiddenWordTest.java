@@ -14,6 +14,8 @@ class HiddenWordTest {
         assertEquals("H*++*", puzzle.getHint("HEART"));
         assertEquals("HAR*S", puzzle.getHint("HARMS"));
         assertEquals("HARPS", puzzle.getHint("HARPS"));
+        assertEquals("H*++", puzzle.getHint("HEAR"));
+        assertEquals("HARP", puzzle.getHint("HARP"));
         assertEquals("HAR****", puzzle.getHint("HARMFUL")); 
         assertEquals("HAR****+", puzzle.getHint("HARMFULS")); 
     }

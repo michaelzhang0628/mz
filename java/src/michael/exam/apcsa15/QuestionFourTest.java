@@ -21,7 +21,7 @@ class QuestionFourTest {
         list.add(new Range(5, 8));
         list.add(new Range(10, 12));
         list.add(new Range(1, 6));
-        MultipleGroups multiple1 = new MultipleGroups(list);
+        NumberGroup multiple1 = new MultipleGroups(list);
         assertTrue(multiple1.contains(2));
         assertFalse(multiple1.contains(9));
         assertTrue(multiple1.contains(6));
