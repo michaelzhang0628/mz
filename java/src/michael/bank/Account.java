@@ -17,7 +17,10 @@ public class Account {
         this.balance = 0;
     }
     
-    public void withdraw(float money) {
+    public void withdraw(float money) throws OverDraftException {
+        if (money > this.balance) {
+            throw new OverDraftException(money - this.balance);
+        }
         balance -= money;
         transactions.add(new Transaction(LocalDate.now(), -money));
     }

@@ -3,7 +3,9 @@ package michael.bank;
 import java.time.LocalDate; 
 
 public class Transaction {
+    // the date and time when this transaction occurred
     private LocalDate date;
+    // negative amount means withdraw, and positive means deposit
     private float amount;
     
     public Transaction(LocalDate date, float amount) {
@@ -17,5 +19,9 @@ public class Transaction {
     
     public float getAmount() {
         return amount;
+    }
+    
+    public static void main(String[] args) {
+        System.out.println(""+LocalDate.now());
     }
 }

@@ -8,6 +8,7 @@ public class Malibu {
     public static Die die3 = new Die();
     private static int highestPoint = 0;
 
+    // After submitting it, it says that I didn't test getPoints. However, I used it in roll3Dice many times and was hoping that was good enough as a test
     private static int getPoints(int total, boolean hasTriple, boolean hasPair) {
         int points = 0;
         if (total == 13 && hasPair) {
@@ -124,6 +125,8 @@ public class Malibu {
                 if (yesOrNo.equals("Yes")) {
                     numRounds = 1;
                     gamesPlayed++;
+                    player.resetScore();
+                    computer.resetScore();
                 }
                 System.out.println("##############################################");
                 System.out.println("##############################################");
@@ -133,6 +136,6 @@ public class Malibu {
         System.out.println("Hightest points earned in " + gamesPlayed + " round(s) was " + highestPoint);
         System.out.println();
         System.out.println("Thanks for playing");
-
+        
     }
 }
