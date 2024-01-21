@@ -20,8 +20,4 @@ public class Transaction {
     public float getAmount() {
         return amount;
     }
-    
-    public static void main(String[] args) {
-        System.out.println(""+LocalDate.now());
-    }
 }
